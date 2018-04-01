@@ -1,0 +1,2 @@
+debian/bin/VOLVOXd usr/bin
+src/VOLVOXd usr/lib/VOLVOX/

@@ -1,0 +1,9 @@
+Building Volvox
+
+See doc/readme-qt.rst for instructions on building Volvox QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of Volvox.
+
+See doc/build-*.txt for instructions on building volvoxd,
+the intended-for-services, no-graphical-interface, reference
+implementation of Volvox.
