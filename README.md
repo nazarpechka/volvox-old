@@ -12,7 +12,7 @@ Specifications:
 * TX fee: 0.05
 * RPC port: 19056 
 * P2P port: 19156 
-* total reward cap: 3,141,592,653
+* Total reward cap: 3,141,592,653
 * Blockreward: 
   * Block 0 to 14,000 : 8,000 coins
   * 14,000 to 28,000 : 4,000 coins
@@ -103,7 +103,7 @@ Compiling VOLVOX MacOS wallet:
     `make -j4`
  
 
-Using the wallet on Linux or MacOS:
+Using VOLVOX Linux and MacOS wallet:
 ----
 The gui wallet is in ./VOLVOX/src/qt and the daemon in ./VOLVOX/src directories.
 
