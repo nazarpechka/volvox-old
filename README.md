@@ -1,13 +1,15 @@
 VOLVOX [VLX] Source Code
 ================================
 
+
 Specifications:
 --------------
 
 * Symbol: VLX
 * PoW (proof of work)
-* Algorithms: scrypt, x17, Lyra2rev2, myr-groestl, & blake2s
+* Algorithms: scrypt, x17, Lyra2rev2, myr-groestl, blake2s
 * Blocktime: 30 seconds 
+* TX fee: 0.05
 * RPC port: 19056 
 * P2P port: 19156 
 * total reward cap: 3,141,592,653
@@ -19,12 +21,22 @@ Specifications:
   * 210,000 to 378,000: 500 coins
   * 378,000 to POW end: 250 coins
 
-Compiling Linux Wallet on Ubuntu/Debian (faster) 
-----------------------
 
-sudo rm -Rf ~/VOLVOX  #(if you already have it) 
+Using VOLVOX on Windows
+-------------
 
-sudo apt-get -y install git && cd ~ && git clone https://github.com/nazarpechka/VOLVOX && cd VOLVOX && sh go.sh
+1. Download the pre-compiled software from "Releases" section.
+2. Run VOLVOX-qt.
+
+Changing configuration file:
+
+1. In windows file explorer, open c:\Users\XXX\AppData\Roaming\VOLVOX (be sure to change XXX to your windows user)
+2. Right click and create a new file VOLVOX.txt
+3. Edit the file using instruction from "Using the wallet on Ubuntu/Debian" section
+4. Save and close the file
+5. Rename the file to VOLVOX.conf
+6. Start the VOLVOX-qt program.
+7. Open up VOLVOX-qt console and run ```getinfo``` (or ```getmininginfo```) to verify settings.
 
 
 Compiling Linux Wallet on Ubuntu/Debian
@@ -40,7 +52,7 @@ Step 1. Install the dependencies.
 
 Step 2. Clone the git repository and compile the daemon and gui wallet:
 
-```git clone https://github.com/nazarpechka/VOLVOX && cd VOLVOX && ./autogen.sh && ./configure --with-incompatible-bdb && make```
+```git clone https://github.com/volvoxcoin/VOLVOX && cd VOLVOX && ./autogen.sh && ./configure --with-incompatible-bdb && make```
 
 if you are using source-build libdb4.8(++)-dev you may need to use
 
@@ -48,59 +60,9 @@ if you are using source-build libdb4.8(++)-dev you may need to use
 
 **Note**: If you get a "memory exhausted" error, make a swap file. (https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04)
 
-Using the wallet:
-----
-The gui wallet is in ./VOLVOX/src/qt and the daemon in ./VOLVOX/src directories.
 
-**Note**: If you see something like 'Killed (program cc1plus)' run ```dmesg``` to see the error(s)/problems(s). This is most likely caused by running out of resources. You may need to add some RAM or add some swap space.
-
-**Optional**:
-If you want to copy the binaries for use by all users, run the following commands:
-
-```sudo cp src/VOLVOXd /usr/bin/```
-
-```sudo cp src/qt/VOLVOX-qt /usr/bin/```
-
-Step 3. Creating a configuration file. Type ```cd ~``` to get back to the home folder and type:
-
-```VOLVOXd.exe```  (or ```./VOLVOXd``` if on mac or linux)
-
-the output from this command will tell you that you need to make a Volvox.conf and will suggest some good starting values.
-
-For Linux users, type:
- 
-```nano ~/.VOLVOX/VOLVOX.conf```
-(For Windows users, see below. For mac users, the command is ```nano ~/Library/Application\ Support\VOLVOX\VOLVOX.conf```)
-    
-Paste the output from the `VOLVOXd` command into the Volvox.conf like this: (It is recommended to change the password to something unique.)
-
-    rpcuser=Volvoxrpcusername
-    rpcpassword=85CpSuCNvDcYsdQU8w621mkQqJAimSQwCSJL5dPT9wQX
-    
-    
-**Optional**: Add `rpcport=19056`, `port=19156`, or `algo=groestl` to the configuration file.
-
-Add `daemon=1`. 
-
-Your config may look something like this:
-
-    rpcuser=Volvoxrpcusername
-    rpcpassword=85CpSuCNvDcYsdQU8w621mkQqJAimSQwCSJL5dPT9wQX
-    rpcport=19056
-    port=19156
-    daemon=1
-    algo=groestl
-
-Exit the Volvox.conf by pressing `ctrl + x` on your keyboard then pressing `y` and hitting enter. This should have created a Volvox.conf file with what you just added. 
-
-Type ```VOLVOXd.exe``` (or ```./VOLVOXd``` if on mac or linux) and your Volvox daemon should start.
-
-To check the status of how much of the blockchain has been downloaded (aka synced) type `VOLVOXd.exe getinfo` (or `./VOLVOXd getinfo` if on mac or linux).
-
-
-
-To compile on Mac (OSX El Capitan, but test compiled on Mountain Lion v10.8):
-------------
+Compiling wallet on Mac (OSX El Capitan, but test compiled on Mountain Lion v10.8):
+----------------------
 1. Ensure you do not have qt5 nor qt installed.
 
     `brew uninstall qt qt5 qt55 qt52`   
@@ -168,10 +130,57 @@ Trying to build .dmg on 10.8? You will need to run this:
     sudo -E easy_install appscript
     
 
-Want to use Docker?
-------------
+Using the wallet on Ubuntu/Debian:
+----
+The gui wallet is in ./VOLVOX/src/qt and the daemon in ./VOLVOX/src directories.
 
-Check out the [readme](https://github.com/nazarpechka/Volvox/tree/master/contrib/docker) for more information.
+**Note**: If you see something like 'Killed (program cc1plus)' run ```dmesg``` to see the error(s)/problems(s). This is most likely caused by running out of resources. You may need to add some RAM or add some swap space.
+
+**Optional**:
+If you want to copy the binaries for use by all users, run the following commands:
+
+```sudo cp src/VOLVOXd /usr/bin/```
+
+```sudo cp src/qt/VOLVOX-qt /usr/bin/```
+
+Step 3. Creating a configuration file. Type ```cd ~``` to get back to the home folder and type:
+
+```VOLVOXd.exe```  (or ```./VOLVOXd``` if on mac or linux)
+
+the output from this command will tell you that you need to make a Volvox.conf and will suggest some good starting values.
+
+For Linux users, type:
+ 
+```nano ~/.VOLVOX/VOLVOX.conf```
+
+For mac users, the command is ```nano ~/Library/Application\Support\VOLVOX\VOLVOX.conf```
+
+**Note:** You must re-start the wallet after making changes to VolvoxCoin.conf.
+
+Paste the output from the `VOLVOXd` command into the Volvox.conf like this: (It is recommended to change the password to something unique.)
+
+    rpcuser=Volvoxrpcusername
+    rpcpassword=85CpSuCNvDcYsdQU8w621mkQqJAimSQwCSJL5dPT9wQX
+    
+    
+**Optional**: Add `rpcport=19056`, `port=19156`, or `algo=groestl` to the configuration file.
+
+Add `daemon=1`. 
+
+Your config may look something like this:
+
+    rpcuser=Volvoxrpcusername
+    rpcpassword=85CpSuCNvDcYsdQU8w621mkQqJAimSQwCSJL5dPT9wQX
+    rpcport=19056
+    port=19156
+    daemon=1
+    algo=groestl
+
+Exit the Volvox.conf by pressing `ctrl + x` on your keyboard then pressing `y` and hitting enter. This should have created a Volvox.conf file with what you just added. 
+
+Type ```VOLVOXd.exe``` (or ```./VOLVOXd``` if on mac or linux) and your Volvox daemon should start.
+
+To check the status of how much of the blockchain has been downloaded (aka synced) type `VOLVOXd.exe getinfo` (or `./VOLVOXd getinfo` if on mac or linux).
 
 
 Want to 'solo-mine' from the wallet?
@@ -189,22 +198,6 @@ To use a specific mining algorithm use the `algo` switch in your configuration f
     algo=groestl
     algo=lyra
     algo=blake
-
-Using VOLVOX on Windows
--------------
-
-1. Download the pre-compiled software.
-2. Install
-3. In windows file explorer, open c:\Users\XXX\AppData\Roaming\VOLVOX (be sure to change XXX to your windows user)
-4. Right click and create a new file VOLVOX.txt
-5. Edit the file to have contents above (see instructions above for options)
-6. Save and close the file
-7. Reame the file to VOLVOX.conf
-8. Start the VOLVOX-qt program.
-9. Open up VOLVOX-qt console and run ```getinfo``` (or ```getmininginfo```) to verify settings.
-
-**Note:** You must re-start the wallet after making changes to VolvoxCoin.conf.
-[How To build on Windows](https://bitcointalk.org/index.php?topic=149479.0)
 
 
 Thanks
