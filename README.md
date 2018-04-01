@@ -22,7 +22,7 @@ Specifications:
   * 378,000 to POW end: 250 coins
 
 
-Using VOLVOX on Windows
+Using VOLVOX Windows wallet
 -------------
 
 1. Download the pre-compiled software from "Releases" section.
@@ -39,7 +39,7 @@ Changing configuration file:
 7. Open up VOLVOX-qt console and run ```getinfo``` (or ```getmininginfo```) to verify settings.
 
 
-Compiling Linux Wallet on Ubuntu/Debian
+Compiling VOLVOX Linux wallet
 ----------------------
 
 Step 1. Install the dependencies. 
@@ -61,7 +61,7 @@ if you are using source-build libdb4.8(++)-dev you may need to use
 **Note**: If you get a "memory exhausted" error, make a swap file. (https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04)
 
 
-Compiling wallet on Mac (OSX El Capitan, but test compiled on Mountain Lion v10.8):
+Compiling VOLVOX MacOS wallet:
 ----------------------
 1. Ensure you do not have qt5 nor qt installed.
 
@@ -101,36 +101,9 @@ Compiling wallet on Mac (OSX El Capitan, but test compiled on Mountain Lion v10.
     `./configure --with-gui=qt5`
     
     `make -j4`
-    
+ 
 
-Building the Mac installer (.dmg) file
------
-Run `make deploy`
-
-If you are building the .dmg (by running 'mac deploy') you may need to run these commands if you get an error regarding mysql:
-
-    brew install mysql
-    
-    cd /usr/local/qt5/5.4/clang_64/plugins/sqldrivers
-    
-    otool -L libqsqlmysql.dylib
-
-Note: This may be pointing to an version of mysql that you do not have installed (like mysql55) - Alternatively, you may be able to remove the library from the sqldrivers folder.
-
-    install_name_tool -change /opt/local/lib/mysql55/mysql/libmysqlclient.18.dylib /usr/local/Cellar/mysql/5.7.12/lib/libmysqlclient.20.dylib libqsqlmysql.dylib
-
-Note: You may also run into issues when using `macdeployqtplus` to create the bundle, and the library will not bundle all of the boost dylibs. It's highly recommended to use the functions provided inside of [dylib-fixes.sh](/building/mac/dylib-fixes.sh)
-
-Trying to build .dmg on 10.8? You will need to run this:
-    
-    export CFLAGS=-Qunused-arguments
-    
-    export CPPFLAGS=-Qunused-arguments
-    
-    sudo -E easy_install appscript
-    
-
-Using the wallet on Ubuntu/Debian:
+Using the wallet on Linux or MacOS:
 ----
 The gui wallet is in ./VOLVOX/src/qt and the daemon in ./VOLVOX/src directories.
 
@@ -200,6 +173,33 @@ To use a specific mining algorithm use the `algo` switch in your configuration f
     algo=blake
 
 
+Building the Mac installer (.dmg) file
+-----
+Run `make deploy`
+
+If you are building the .dmg (by running 'mac deploy') you may need to run these commands if you get an error regarding mysql:
+
+    brew install mysql
+    
+    cd /usr/local/qt5/5.4/clang_64/plugins/sqldrivers
+    
+    otool -L libqsqlmysql.dylib
+
+Note: This may be pointing to an version of mysql that you do not have installed (like mysql55) - Alternatively, you may be able to remove the library from the sqldrivers folder.
+
+    install_name_tool -change /opt/local/lib/mysql55/mysql/libmysqlclient.18.dylib /usr/local/Cellar/mysql/5.7.12/lib/libmysqlclient.20.dylib libqsqlmysql.dylib
+
+Note: You may also run into issues when using `macdeployqtplus` to create the bundle, and the library will not bundle all of the boost dylibs. It's highly recommended to use the functions provided inside of [dylib-fixes.sh](/building/mac/dylib-fixes.sh)
+
+Trying to build .dmg on 10.8? You will need to run this:
+    
+    export CFLAGS=-Qunused-arguments
+    
+    export CPPFLAGS=-Qunused-arguments
+    
+    sudo -E easy_install appscript
+    
+    
 Thanks
 ----
 Special Thanks to: 
