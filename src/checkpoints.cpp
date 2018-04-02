@@ -97,7 +97,7 @@ namespace Checkpoints
         return NULL;
     }
 
-    // ppcoin: synchronized checkpoint (centrally broadcasted)
+    // volvox: synchronized checkpoint (centrally broadcasted)
     uint256 hashSyncCheckpoint = 0;
     uint256 hashPendingCheckpoint = 0;
     CSyncCheckpoint checkpointMessage;
@@ -105,7 +105,7 @@ namespace Checkpoints
     uint256 hashInvalidCheckpoint = 0;
     CCriticalSection cs_hashSyncCheckpoint;
 
-    // ppcoin: get last synchronized checkpoint
+    // volvox: get last synchronized checkpoint
     CBlockIndex* GetLastSyncCheckpoint()
     {
         LOCK(cs_hashSyncCheckpoint);
@@ -116,7 +116,7 @@ namespace Checkpoints
         return NULL;
     }
 
-    // ppcoin: only descendant of current sync-checkpoint is allowed
+    // volvox: only descendant of current sync-checkpoint is allowed
     bool ValidateSyncCheckpoint(uint256 hashCheckpoint)
     {
         if (!mapBlockIndex.count(hashSyncCheckpoint))
@@ -273,7 +273,7 @@ namespace Checkpoints
         return false;
     }
 
-    // ppcoin: reset synchronized checkpoint to last hardened checkpoint
+    // volvox: reset synchronized checkpoint to last hardened checkpoint
     bool ResetSyncCheckpoint()
     {
         LOCK(cs_hashSyncCheckpoint);
@@ -394,13 +394,13 @@ namespace Checkpoints
     }
 }
 
-// ppcoin: sync-checkpoint master keys
+// volvox: sync-checkpoint master keys
 const std::string CSyncCheckpoint::strMainMasterPubKey = "048ed695d00ecca8b8e13bbb15f4b496f83c6851d89c9520e9258c102b345c96cafc33f0243cb8b337c19dab37b6ab380c34eb4c3821227a97813f69632854b817";
 const std::string CSyncCheckpoint::strTestMasterPubKey = "04553a7a4741d6792cc8caaea6421f2807812214e2f7b524480c14297c0f79b7290859a5ad832c97ea357ad4a5000f4511f4529b44dc47c74babc4e12452e6da74";
 
 std::string CSyncCheckpoint::strMasterPrivKey = "";
 
-// ppcoin: verify signature of sync-checkpoint message
+// volvox: verify signature of sync-checkpoint message
 bool CSyncCheckpoint::CheckSignature()
 {
     CKey key;
@@ -415,7 +415,7 @@ bool CSyncCheckpoint::CheckSignature()
     return true;
 }
 
-// ppcoin: process synchronized checkpoint
+// volvox: process synchronized checkpoint
 bool CSyncCheckpoint::ProcessSyncCheckpoint(CNode* pfrom)
 {
     if (!CheckSignature())

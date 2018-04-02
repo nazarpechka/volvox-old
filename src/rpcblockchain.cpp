@@ -283,7 +283,7 @@ Value getrawblockbynumber(const Array& params, bool fHelp)
     return strHex;
 }
 
-// ppcoin: get information of sync-checkpoint
+// volvox: get information of sync-checkpoint
 Value getcheckpoint(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)

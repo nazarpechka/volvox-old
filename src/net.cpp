@@ -1143,7 +1143,7 @@ void static ProcessOneShot()
     }
 }
 
-// ppcoin: stake minter thread
+// volvox: stake minter thread
 void static ThreadStakeMinter(void* parg)
 {
     printf("ThreadStakeMinter started\n");
@@ -1718,7 +1718,7 @@ void StartNode(void* parg)
     if (!NewThread(ThreadDumpAddress, NULL))
         printf("Error; NewThread(ThreadDumpAddress) failed\n");
 
-    // ppcoin: mint proof-of-stake blocks in the background
+    // volvox: mint proof-of-stake blocks in the background
     //if (!NewThread(ThreadStakeMinter, pwalletMain))
     //    printf("Error: NewThread(ThreadStakeMinter) failed\n");
 

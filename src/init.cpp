@@ -645,7 +645,7 @@ bool AppInit2()
         }
     }
 
-    if (mapArgs.count("-reservebalance")) // ppcoin: reserve balance amount
+    if (mapArgs.count("-reservebalance")) // volvox: reserve balance amount
     {
         int64 nReserveBalance = 0;
         if (!ParseMoney(mapArgs["-reservebalance"], nReserveBalance))
@@ -655,7 +655,7 @@ bool AppInit2()
         }
     }
 
-    if (mapArgs.count("-checkpointkey")) // ppcoin: checkpoint master priv key
+    if (mapArgs.count("-checkpointkey")) // volvox: checkpoint master priv key
     {
         if (!Checkpoints::SetCheckpointPrivKey(GetArg("-checkpointkey", "")))
             InitError(_("Unable to sign checkpoint, wrong checkpointkey?\n"));

@@ -54,7 +54,7 @@ namespace Checkpoints
 
 }
 
-// ppcoin: synchronized checkpoint
+// volvox: synchronized checkpoint
 class CUnsignedSyncCheckpoint
 {
 public:
