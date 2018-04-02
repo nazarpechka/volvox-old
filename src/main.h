@@ -34,8 +34,8 @@ static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 static const unsigned int MAX_INV_SZ = 50000;
-static const int64 MIN_TX_FEE = 10 * CENT;
-static const int64 MIN_RELAY_TX_FEE = 10 * CENT;
+static const int64 MIN_TX_FEE = 5 * CENT;
+static const int64 MIN_RELAY_TX_FEE = 5 * CENT;
 static const int64 MAX_MONEY = 31415926535 * COIN; //
 static const int DISABLE_POS_BLOCK = 1;
 /** Dust Soft Limit, allowed with additional fee per output */
