@@ -1,4 +1,4 @@
-VOLVOX 0.1.0
+VOLVOX 2.3.4
 
 Copyright (c) 2018 VOLVOX Developers
 Copyright (c) 2014-2018 SHIELD Developers
