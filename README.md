@@ -9,18 +9,19 @@ Specifications:
 * PoW (proof of work)
 * Algorithms: scrypt, x17, Lyra2rev2, myr-groestl, blake2s
 * Blocktime: 30 seconds 
-* TX fee: 0.05
+* TX fee: 0.1
 * RPC port: 19056 
 * P2P port: 19156 
-* Total reward cap: 3,141,592,653
-* Blockreward: 
-  * Block 0 to 14,000 : 8,000 coins
-  * 14,000 to 28,000 : 4,000 coins
-  * 28,000 to 42,000: 2,000 coins
-  * 42,000 to 210,000: 1,000 coins
-  * 210,000 to 378,000: 500 coins
-  * 378,000 to POW end: 250 coins
-
+* Total reward cap: 31,415,926,535
+* Blockreward (~26 years of PoW): 
+  * Block 0 to 30,000 : 8,000 coins
+  * 30,000 to 60,000 : 7,000 coins
+  * 60,000 to 120,000: 6,000 coins
+  * 120,000 to 240,000: 5,000 coins
+  * 240,000 to 480,000: 4,000 coins
+  * 480,000 to 960,000: 3,000 coins
+  * 960,000 to 1,920,000: 2,000 coins
+  * 1,920,000 to ~25,685,926: 1,000 coins
 
 Using VOLVOX Windows wallet
 -------------
