@@ -1,11 +1,11 @@
-VOLVOX [VLX] Source Code
+VOLVOX [VVX] Source Code
 ================================
 
 
 Specifications:
 --------------
 
-* Symbol: VLX
+* Symbol: VVX
 * PoW (proof of work)
 * Algorithms: scrypt, x17, Lyra2rev2, myr-groestl, blake2s
 * Blocktime: 30 seconds 

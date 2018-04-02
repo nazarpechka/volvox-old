@@ -391,17 +391,17 @@ max-width: 100px;</string>
            </property>
            <item>
             <property name="text">
-             <string>VLX</string>
+             <string>VVX</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>mVLX</string>
+             <string>mVVX</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>uVLX</string>
+             <string>uVVX</string>
             </property>
            </item>
           </widget>
