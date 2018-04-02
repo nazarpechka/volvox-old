@@ -9,7 +9,7 @@ Specifications:
 * PoW (proof of work)
 * Algorithms: scrypt, x17, Lyra2rev2, myr-groestl, blake2s
 * Blocktime: 30 seconds 
-* TX fee: 0.1
+* TX fee: 0.05
 * RPC port: 19056 
 * P2P port: 19156 
 * Total reward cap: 31,415,926,535
