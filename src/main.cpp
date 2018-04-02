@@ -52,7 +52,7 @@ unsigned int nStakeTargetSpacing = 30;		// 30 seconds POS block spacing
 //unsigned int nProofOfWorkTargetSpacing = 15; 	// 30 seconds PoW block spacing
 
 int64 nChainStartTime = 1522523994;
-int nCoinbaseMaturity = 100;
+int nCoinbaseMaturity = 80;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 CBigNum bnBestChainTrust = 0;
@@ -264,10 +264,6 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
     }
     return nEvicted;
 }
-
-
-
-
 
 
 
@@ -912,9 +908,6 @@ bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock)
 
 
 
-
-
-
 //////////////////////////////////////////////////////////////////////////////
 //
 // CBlock and CBlockIndex
@@ -974,29 +967,37 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees)
 {
     int64 nSubsidy = 32 * COIN;
 
-    if (nHeight<14001 && nHeight>0)
+    if (nHeight<30001 && nHeight>0)
     {
     	nSubsidy = 8000 * COIN;
     }
-    if (nHeight<28001 && nHeight>14000)
+    if (nHeight<60001 && nHeight>30000)
+    {
+        nSubsidy = 7000 * COIN;
+    }
+    if (nHeight<120001 && nHeight>60000)
+    {
+        nSubsidy = 6000 * COIN;
+    }
+    if (nHeight<240001 && nHeight>120000)
+    {
+        nSubsidy = 5000 * COIN;
+    }
+    if (nHeight<480001 && nHeight>240000)
     {
         nSubsidy = 4000 * COIN;
     }
-    if (nHeight<42001 && nHeight>28000)
+    if (nHeight<960001 && nHeight>480000)
+    {
+        nSubsidy = 3000 * COIN;
+    }
+    if (nHeight<1920001 && nHeight>960000)
     {
         nSubsidy = 2000 * COIN;
     }
-    if (nHeight<210001 && nHeight>42000)
+    if (nHeight<25685926 && nHeight>1920000)
     {
         nSubsidy = 1000 * COIN;
-    }
-    if (nHeight<378001 && nHeight>210000)
-    {
-        nSubsidy = 500 * COIN;
-    }
-    if (nHeight>378000)
-    {
-        nSubsidy = 250 * COIN;
     }
     return nSubsidy + nFees;
 }
@@ -1158,13 +1159,13 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
     // both of these check the shortest interval to quickly stop when overshot.  Otherwise first is longer and second shorter.
     if (avgOf5 < toofast && avgOf9 < toofast && avgOf17 < toofast)
     {  //emergency adjustment, slow down (longer intervals because shorter blocks)
-      printf("difficulty: GetNextWorkRequired EMERGENCY RETARGET\n");
+      //printf("difficulty: GetNextWorkRequired EMERGENCY RETARGET\n");
       difficultyfactor *= 8;
       difficultyfactor /= 5;
     }
     else if (avgOf5 > tooslow && avgOf7 > tooslow && avgOf9 > tooslow)
     {  //emergency adjustment, speed up (shorter intervals because longer blocks)
-      printf("difficulty: GetNextWorkRequired EMERGENCY RETARGET\n");
+      //printf("difficulty: GetNextWorkRequired EMERGENCY RETARGET\n");
       difficultyfactor *= 5;
       difficultyfactor /= 8;
     }
@@ -1175,7 +1176,7 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
     { // At least 3 averages too high or at least 3 too low, including the two longest. This will be executed 3/16 of
       // the time on the basis of random variation, even if the settings are perfect. It regulates one-sixth of the way
       // to the calculated point.
-      printf("difficulty: GetNextWorkRequired RETARGET\n");
+      //printf("difficulty: GetNextWorkRequired RETARGET\n");
       difficultyfactor *= (6 * nIntervalDesired);
       difficultyfactor /= (avgOf17 +(5 * nIntervalDesired));
     }
@@ -1199,13 +1200,13 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
     if (bnNew > bnProofOfWorkLimit[algo])
       bnNew = bnProofOfWorkLimit[algo];
 
-    printf("difficulty: ctual time %" PRId64 ", Scheduled time for this block height = %" PRId64 "\n", now, BlockHeightTime );
-    printf("difficulty: Nominal block interval = %u, regulating on interval %" PRId64 " to get back to schedule.\n", 
-          GetTargetSpacing(pindexLast->nHeight), nIntervalDesired );
-    printf("difficulty: Intervals of last 5/7/9/17 blocks = %" PRId64 "/ %" PRId64 " / %" PRId64 " / %" PRId64 ".\n",
-          avgOf5, avgOf7, avgOf9, avgOf17);
-    printf("difficulty: Difficulty Before Adjustment: %u  %s\n", pindexLast->nBits, bnOld.ToString().c_str());
-    printf("difficulty: Difficulty After Adjustment:  %u  %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
+    //printf("difficulty: ctual time %" PRId64 ", Scheduled time for this block height = %" PRId64 "\n", now, BlockHeightTime );
+    //printf("difficulty: Nominal block interval = %u, regulating on interval %" PRId64 " to get back to schedule.\n", 
+    //      GetTargetSpacing(pindexLast->nHeight), nIntervalDesired );
+    //printf("difficulty: Intervals of last 5/7/9/17 blocks = %" PRId64 "/ %" PRId64 " / %" PRId64 " / %" PRId64 ".\n",
+    //      avgOf5, avgOf7, avgOf9, avgOf17);
+    //printf("difficulty: Difficulty Before Adjustment: %u  %s\n", pindexLast->nBits, bnOld.ToString().c_str());
+    //printf("difficulty: Difficulty After Adjustment:  %u  %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 
     return bnNew.GetCompact();
      
@@ -1418,16 +1419,6 @@ void CBlock::UpdateTime(const CBlockIndex* pindexPrev)
 {
     nTime = max(GetBlockTime(), GetAdjustedTime());
 }
-
-
-
-
-
-
-
-
-
-
 
 bool CTransaction::DisconnectInputs(CTxDB& txdb)
 {
@@ -1741,8 +1732,6 @@ bool CTransaction::ClientConnectInputs()
 
     return true;
 }
-
-
 
 
 bool CBlock::DisconnectBlock(CTxDB& txdb, CBlockIndex* pindex)
@@ -3012,7 +3001,6 @@ bool LoadBlockIndex(bool fAllowNew)
            assert(block.hashMerkleRoot == uint256("0xea62271088efe5d5934464b7d57390d4fdcf98ac63f0bc9927576c54b281107e"));
         }
 
-
 		assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
 		assert(block.CheckBlock());
 
@@ -3326,11 +3314,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         printf("dropmessagestest DROPPING RECV MESSAGE\n");
         return true;
     }
-
-
-
-
-
     if (strCommand == "version")
     {
         // Each connection can only send one version message
@@ -4348,13 +4331,6 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
     }
     return true;
 }
-
-
-
-
-
-
-
 
 
 
