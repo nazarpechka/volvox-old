@@ -1,4 +1,5 @@
-// Copyright (c) 2016 VOLVOX Developers
+// Copyright (c) 2018 VOLVOX Developers
+// Copyright (c) 2014-2017 SHIELD Developers
 
 #include <string.h>
 #include "pbkdf2.h"

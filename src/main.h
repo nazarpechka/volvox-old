@@ -29,6 +29,8 @@ class CRequestTracker;
 class CNode;
 
 static const int MULTI_ALGO_SWITCH_BLOCK = 10000;
+static const int ALGO_RULES_SWITCH_BLOCK = 10500;
+static const int SAME_ALGO_MAX_COUNT = 5;
 static const unsigned int MAX_BLOCK_SIZE = 500000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
@@ -1018,6 +1020,7 @@ public:
     }
 
     int GetAlgo() const { return ::GetAlgo(nVersion); }
+    bool CheckBlocksAlgo(CBlockIndex* pIndex);
 
     IMPLEMENT_SERIALIZE
     (
