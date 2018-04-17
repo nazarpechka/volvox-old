@@ -2392,7 +2392,7 @@ bool CBlock::AcceptBlock()
     
     if (nHeight > ALGO_RULES_SWITCH_BLOCK)
     {
-        if (!CheckPrevAlgo(pindexPrev))
+        if (!CheckBlocksAlgo(pindexPrev))
             return error("AcceptBlock() : too many blocks found using same algorithm");
     }
 
