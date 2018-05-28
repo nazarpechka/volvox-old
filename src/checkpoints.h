@@ -41,6 +41,7 @@ namespace Checkpoints
     bool AcceptPendingSyncCheckpoint();
     uint256 AutoSelectSyncCheckpoint();
     bool CheckSync(const uint256& hashBlock, const CBlockIndex* pindexPrev);
+    double GuessVerificationProgress(CBlockIndex *pindex);
     bool WantedByPendingSyncCheckpoint(uint256 hashBlock);
     bool ResetSyncCheckpoint();
     void AskForPendingSyncCheckpoint(CNode* pfrom);

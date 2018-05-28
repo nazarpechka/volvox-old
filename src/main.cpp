@@ -1084,9 +1084,9 @@ void avgRecentTimestamps(const CBlockIndex* pindexLast, int64_t *avgOf5, int64_t
     if (blockoffset < 5) *avgOf5 += (oldblocktime - blocktime);
     if (blockoffset < 7) *avgOf7 += (oldblocktime - blocktime);
     if (blockoffset < 9) *avgOf9 += (oldblocktime - blocktime);
-    *avgOf17 += (oldblocktime - blocktime);    
+    *avgOf17 += (oldblocktime - blocktime);
   }
-  // now we have the sums of the block intervals. Division gets us the averages. 
+  // now we have the sums of the block intervals. Division gets us the averages.
   *avgOf5 /= 5;
   *avgOf7 /= 7;
   *avgOf9 /= 9;
@@ -1109,15 +1109,15 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
     int64_t nFastInterval = (GetTargetSpacing(pindexLast->nHeight) * 9 ) / 10; // seconds per block desired when far behind schedule
     int64_t nSlowInterval = (GetTargetSpacing(pindexLast->nHeight) * 11) / 10; // seconds per block desired when far ahead of schedule
     int64_t nIntervalDesired;
-    
+
 
     CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimit[algo];
     unsigned int nTargetLimit = bnTargetLimit.GetCompact();
-    
+
     if (pindexLast == NULL)
         // Genesis Block
         return nTargetLimit;
-   
+
     // Regulate block times so as to remain synchronized in the long run with the actual time.  The first step is to
     // calculate what interval we want to use as our regulatory goal.  It depends on how far ahead of (or behind)
     // schedule we are.  If we're more than an adjustment period ahead or behind, we use the maximum (nSlowInterval) or minimum
@@ -1125,31 +1125,31 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
     // to being exactly on schedule the closer our selected interval will be to our nominal interval (TargetSpacing).
 
     now = pindexLast->GetBlockTime();
-    
+
     BlockHeightTime = pindexGenesisBlock->nTime + pindexLast->nHeight * GetTargetSpacing(pindexLast->nHeight);
-    
+
     if (now < BlockHeightTime + nTargetTimespan && now > BlockHeightTime )
     // ahead of schedule by less than one interval.
-    nIntervalDesired = ((nTargetTimespan - (now - BlockHeightTime)) * GetTargetSpacing(pindexLast->nHeight) +  
+    nIntervalDesired = ((nTargetTimespan - (now - BlockHeightTime)) * GetTargetSpacing(pindexLast->nHeight) +
                 (now - BlockHeightTime) * nFastInterval) / GetTargetSpacing(pindexLast->nHeight);
     else if (now + nTargetTimespan > BlockHeightTime && now < BlockHeightTime)
     // behind schedule by less than one interval.
-    nIntervalDesired = ((nTargetTimespan - (BlockHeightTime - now)) * GetTargetSpacing(pindexLast->nHeight) + 
+    nIntervalDesired = ((nTargetTimespan - (BlockHeightTime - now)) * GetTargetSpacing(pindexLast->nHeight) +
                 (BlockHeightTime - now) * nSlowInterval) / nTargetTimespan;
 
     // ahead by more than one interval;
     else if (now < BlockHeightTime) nIntervalDesired = nSlowInterval;
-    
-    // behind by more than an interval. 
+
+    // behind by more than an interval.
     else  nIntervalDesired = nFastInterval;
-    
-    // find out what average intervals over last 5, 7, 9, and 17 blocks have been. 
-    avgRecentTimestamps(pindexLast, &avgOf5, &avgOf7, &avgOf9, &avgOf17);    
+
+    // find out what average intervals over last 5, 7, 9, and 17 blocks have been.
+    avgRecentTimestamps(pindexLast, &avgOf5, &avgOf7, &avgOf9, &avgOf17);
 
     // check for emergency adjustments. These are to bring the diff up or down FAST when a burst miner or multipool
     // jumps on or off.  Once they kick in they can adjust difficulty very rapidly, and they can kick in very rapidly
     // after massive hash power jumps on or off.
-    
+
     // Important note: This is a self-damping adjustment because 8/5 and 5/8 are closer to 1 than 3/2 and 2/3.  Do not
     // screw with the constants in a way that breaks this relationship.  Even though self-damping, it will usually
     // overshoot slightly. But normal adjustment will handle damping without getting back to emergency.
@@ -1170,7 +1170,7 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
       difficultyfactor /= 8;
     }
 
-    // If no emergency adjustment, check for normal adjustment. 
+    // If no emergency adjustment, check for normal adjustment.
     else if (((avgOf5 > nIntervalDesired || avgOf7 > nIntervalDesired) && avgOf9 > nIntervalDesired && avgOf17 > nIntervalDesired) ||
          ((avgOf5 < nIntervalDesired || avgOf7 < nIntervalDesired) && avgOf9 < nIntervalDesired && avgOf17 < nIntervalDesired))
     { // At least 3 averages too high or at least 3 too low, including the two longest. This will be executed 3/16 of
@@ -1191,7 +1191,7 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
 
     bnOld.SetCompact(pindexLast->nBits);
 
-    if (difficultyfactor == 10000) // no adjustment. 
+    if (difficultyfactor == 10000) // no adjustment.
       return(bnOld.GetCompact());
 
     bnNew = bnOld / difficultyfactor;
@@ -1201,7 +1201,7 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
       bnNew = bnProofOfWorkLimit[algo];
 
     //printf("difficulty: ctual time %" PRId64 ", Scheduled time for this block height = %" PRId64 "\n", now, BlockHeightTime );
-    //printf("difficulty: Nominal block interval = %u, regulating on interval %" PRId64 " to get back to schedule.\n", 
+    //printf("difficulty: Nominal block interval = %u, regulating on interval %" PRId64 " to get back to schedule.\n",
     //      GetTargetSpacing(pindexLast->nHeight), nIntervalDesired );
     //printf("difficulty: Intervals of last 5/7/9/17 blocks = %" PRId64 "/ %" PRId64 " / %" PRId64 " / %" PRId64 ".\n",
     //      avgOf5, avgOf7, avgOf9, avgOf17);
@@ -1209,7 +1209,7 @@ unsigned int GetNextTargetRequired_V2(const CBlockIndex* pindexLast, bool fProof
     //printf("difficulty: Difficulty After Adjustment:  %u  %s\n", bnNew.GetCompact(), bnNew.ToString().c_str());
 
     return bnNew.GetCompact();
-     
+
 }
 
 unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast, uint64 TargetBlocksSpacingSeconds, int algo) {
@@ -2092,9 +2092,9 @@ bool CBlock::SetBestChain(CTxDB& txdb, CBlockIndex* pindexNew)
     bnBestChainTrust = pindexNew->bnChainTrust;
     nTimeBestReceived = GetTime();
     nTransactionsUpdated++;
-    printf("SetBestChain: new best=%s  height=%d  trust=%s  date=%s\n",
+    printf("SetBestChain: new best=%s  height=%d  trust=%s  date=%s progress=%f%\n",
       hashBestChain.ToString().substr(0,20).c_str(), nBestHeight, bnBestChainTrust.ToString().c_str(),
-      DateTimeStrFormat("%x %H:%M:%S", pindexBest->GetBlockTime()).c_str());
+      DateTimeStrFormat("%x %H:%M:%S", pindexBest->GetBlockTime()).c_str(), Checkpoints::GuessVerificationProgress(pindexBest));
 
     // Check the version of the last 100 blocks to see if we need to upgrade:
     if (!fIsInitialDownload)
@@ -2302,11 +2302,11 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig) c
     for (unsigned int i = 2; i < vtx.size(); i++)
         if (vtx[i].IsCoinStake())
             return DoS(100, error("CheckBlock() : coinstake in wrong position"));
-	
+
 	// volvox: coinbase output should be empty if proof-of-stake block
     if (IsProofOfStake() && (vtx[0].vout.size() != 1 || !vtx[0].vout[0].IsEmpty()))
         return error("CheckBlock() : coinbase output not empty for proof-of-stake block");
-	
+
 	// Check coinbase timestamp
     if (GetBlockTime() > (int64)vtx[0].nTime + nMaxClockDrift)
         return DoS(50, error("CheckBlock() : coinbase timestamp is too early"));
@@ -2358,21 +2358,21 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig) c
 bool CBlock::CheckBlocksAlgo(CBlockIndex* pIndex)
 {
     unsigned checkedBlocks = 0;
-    
+
     unsigned sameAlgoBlocks = 0;
-    
+
     while (pIndex && checkedBlocks != 2*SAME_ALGO_MAX_COUNT)
     {
         if (::GetAlgo(pIndex->nVersion) == GetAlgo())
             ++sameAlgoBlocks;
-        
+
         ++checkedBlocks;
         pIndex = pIndex->pprev;
     }
-    
+
     if (sameAlgoBlocks > SAME_ALGO_MAX_COUNT)
         return false;
-    
+
     return true;
 }
 
@@ -2389,7 +2389,7 @@ bool CBlock::AcceptBlock()
         return DoS(10, error("AcceptBlock() : prev block not found"));
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
-    
+
     if (nHeight > ALGO_RULES_SWITCH_BLOCK)
     {
         if (!CheckBlocksAlgo(pindexPrev))
@@ -2961,7 +2961,7 @@ bool LoadBlockIndex(bool fAllowNew)
         txNew.nTime = nChainStartTime;
 				if(fTestNet)
 					txNew.nTime = nChainStartTime;
-				
+
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2980,7 +2980,7 @@ bool LoadBlockIndex(bool fAllowNew)
 			block.nTime = 1522523994;
 			block.nNonce = 2533918;
         }
-        
+
         // {
         //                 // If genesis block hash does not match, then generate new genesis hash.
         //     if (block.GetHash() != (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet))
@@ -2993,7 +2993,7 @@ bool LoadBlockIndex(bool fAllowNew)
         //         while(true)
         //         {
         //             static char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-        //             scrypt_1024_1_1_256_sp(BEGIN(block.nVersion), BEGIN(thash), scratchpad);        
+        //             scrypt_1024_1_1_256_sp(BEGIN(block.nVersion), BEGIN(thash), scratchpad);
         //             if (thash <= hashTarget)
         //                 break;
         //             if ((block.nNonce & 0xFFF) == 0)
@@ -3013,13 +3013,13 @@ bool LoadBlockIndex(bool fAllowNew)
         //         printf("block.hashMerkleRoot == %s\n", block.hashMerkleRoot.ToString().c_str());
         //     }
         // }
-        
+
         //// debug print
 		block.print();
         printf("block.GetHash() == %s\n", block.GetHash().ToString().c_str());
         printf("block.hashMerkleRoot == %s\n", block.hashMerkleRoot.ToString().c_str());
         printf("block.nTime = %u \n", block.nTime);
-        printf("block.nNonce = %u \n", block.nNonce);				
+        printf("block.nNonce = %u \n", block.nNonce);
 
 		if(fTestNet) {
            assert(block.hashMerkleRoot == uint256("0x800ccb6e1481447b644a45380df7e21b9d156984fc4264d6d1a83157095b2add"));
@@ -3058,13 +3058,13 @@ bool LoadBlockIndex(bool fAllowNew)
                 return error("LoadBlockIndex() : failed to commit new checkpoint master key to db");
             if ((!fTestNet) && !Checkpoints::ResetSyncCheckpoint())
                 return error("LoadBlockIndex() : failed to reset sync-checkpoint");
-        } 
+        }
 
          if (Checkpoints::GetHackReload()) {
             printf("%s\n", "Invalid blockchain, resetting sync checkpoint");
             Checkpoints::SetHackReload(false);
             Checkpoints::ResetSyncCheckpoint();
-        } 
+        }
 
     }
 
@@ -3601,7 +3601,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 
         if (fDebugNet || (vInv.size() != 1))
             printf("received getdata (%" PRIszu" invsz)\n", vInv.size());
-		
+
 		vector<CInv> vNotFound;
 
         BOOST_FOREACH(const CInv& inv, vInv)
@@ -3686,7 +3686,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             // Track requests for our stuff
             Inventory(inv.hash);
         }
-		
+
         if (!vNotFound.empty()) {
             // Let the peer know that we didn't find what it asked for, so it doesn't
             // have to wait around forever. Currently only SPV clients actually care
@@ -4017,7 +4017,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         return error("peer %s attempted to set a bloom filter even though we do not advertise that service",
                      pfrom->addr.ToString().c_str());
     }
-	
+
 	else if (strCommand == "filterload")
     {
         CBloomFilter filter;
@@ -4471,7 +4471,7 @@ CBlock* CreateNewBlock(CWallet* pwallet, bool fProofOfStake, int algo)
     #else
         auto_ptr<CBlock> pblock(new CBlock());
     #endif
-    
+
     if (!pblock.get())
         return NULL;
 
@@ -4507,7 +4507,7 @@ CBlock* CreateNewBlock(CWallet* pwallet, bool fProofOfStake, int algo)
     if (!reservekey.GetReservedKey(pubkey))
         return NULL;
     txNew.vout[0].scriptPubKey << pubkey << OP_CHECKSIG;
-    
+
     // Add our coinbase tx as first transaction
     pblock->vtx.push_back(txNew);
 
@@ -4933,7 +4933,7 @@ void VOLVOXMiner(CWallet *pwallet, bool fProofOfStake)
         #else
             auto_ptr<CBlock> pblock(CreateNewBlock(pwallet, fProofOfStake, fProofOfStake ? ALGO_SCRYPT : miningAlgo));
         #endif
-        
+
         if (!pblock.get())
             return;
         IncrementExtraNonce(pblock.get(), pindexPrev, nExtraNonce);

@@ -27,11 +27,11 @@ namespace Checkpoints
         (     0,  hashGenesisBlockOfficial)
         (   500, uint256("0x8ca8fbb75da71b32eea08affafb69f02f25bf05fcee9e9b268368a6762109028"))
         (   750, uint256("0x5b62048545ec0697bf87399db916a92e73e5d1047eebe497009d647debaf5bfb"))
-        // (  100000, uint256("0xd0aa58f4abb1b422595a850cc32dc081e9235774d5d9517e1a469f202ddb791e"))
-        // (  150000, uint256("0x90ce1a2a93125950ad4df9ba9ebd86e94d372617b8700b1da3555c740edc944f"))
-        // (  200000, uint256("0xaac305b12967a7186f0e4cb3a781a73ceca81f98dec396178f2f901b2856d106"))
-        // (  300000, uint256("0x1eae4274a8642434391a611748082436143860a9d8e15d78ecb4fe728eb99f5c"))
-        // (  380000, uint256("0x907ffa7caeaa7d5216b8a43517e66feef3c655e1da9289eef2e2a7f0e054248e"))
+        (  1000, uint256("0x9b34eb63a5e9529bb74e91abb73c72f4e7a0a81ea55402ac2f980d76ba986efd"))
+        (  5000, uint256("0x58535a5ce2516a940946a7776ef1d4440685cd6e89e6a0453da00cf45a6e62af"))
+       (  10000, uint256("0xaa3070d610fa3ad34140af26694f9f671b70ee265bf9a11cdea2e381d9980558"))
+       (  50000, uint256("0x0000000001479f4a08e30ac4a668c13ffaaf9bd8b92f96797b6a1a8ce22aeebb"))
+      (  100000, uint256("0x907ffa7caeaa7d5216b8a43517e66feef3c655e1da9289eef2e2a7f0e054248e"))
 	// (  90000, uint256("0x0000000010f470ed5eda53dc12707e34297e75b7bd91f5e5ac9fb72050112e57"))
 	// (  100000, uint256("0x000000000400a93131a94ad193c63faafeb8dfcc0c7d0e6f1c9c2614cb2823eb"))
 	// (  150000, uint256("0x0000000000548f44babc055557c5870b15d1401bb0de72fb6a6c19d6c5f36d10"))
@@ -258,6 +258,37 @@ namespace Checkpoints
         if (nHeight < pindexSync->nHeight && !mapBlockIndex.count(hashBlock))
             return false; // lower height than sync-checkpoint
         return true;
+    }
+
+    // Guess how far we are in the verification process at the given block index
+    double GuessVerificationProgress(CBlockIndex *pindex) {
+        if (pindex==NULL)
+            return 0.0;
+
+        int64 nNow = time(NULL);
+
+        double fWorkBefore = 0.0; // Amount of work done before pindex
+        double fWorkAfter = 0.0;  // Amount of work left after pindex (estimated)
+        // Work is defined as: 1.0 per transaction before the last checkoint, and
+        // fSigcheckVerificationFactor per transaction after.
+
+        const CCheckpointData &data = Checkpoints();
+
+        if (pindex->nChainTx <= data.nTransactionsLastCheckpoint) {
+            double nCheapBefore = pindex->nChainTx;
+            double nCheapAfter = data.nTransactionsLastCheckpoint - pindex->nChainTx;
+            double nExpensiveAfter = (nNow - data.nTimeLastCheckpoint)/86400.0*data.fTransactionsPerDay;
+            fWorkBefore = nCheapBefore;
+            fWorkAfter = nCheapAfter + nExpensiveAfter*fSigcheckVerificationFactor;
+        } else {
+            double nCheapBefore = data.nTransactionsLastCheckpoint;
+            double nExpensiveBefore = pindex->nChainTx - data.nTransactionsLastCheckpoint;
+            double nExpensiveAfter = (nNow - pindex->nTime)/86400.0*data.fTransactionsPerDay;
+            fWorkBefore = nCheapBefore + nExpensiveBefore*fSigcheckVerificationFactor;
+            fWorkAfter = nExpensiveAfter*fSigcheckVerificationFactor;
+        }
+
+        return fWorkBefore / (fWorkBefore + fWorkAfter);
     }
 
     bool WantedByPendingSyncCheckpoint(uint256 hashBlock)
