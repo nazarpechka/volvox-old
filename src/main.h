@@ -15,6 +15,7 @@
 #include "hashx17.h"
 #include "Lyra2RE.h"
 #include <list>
+#include "ui_interface.h"
 
 class CWallet;
 class CBlock;
