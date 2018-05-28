@@ -28,12 +28,12 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, bool isTestNet) :
     int titleVersionVSpace      = 15;
     int titleCopyrightVSpace    = 20;
 
-    float fontFactor            = 0.7;
+    float fontFactor            = 0.8;
 
     // define text to place
-    QString titleText       = tr("SHIELD Core");
+    QString titleText       = tr("VOLVOX Core");
     QString versionText     = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
-    QString copyrightText   = QChar(0xA9)+QString(" 2017-%1 ").arg(COPYRIGHT_YEAR) + QString(tr("The SHIELD Core developers"));
+    QString copyrightText   = QChar(0xA9)+QString(" %1 ").arg(COPYRIGHT_YEAR) + QString(tr("The VOLVOX Core developers"));
     QString testnetAddText  = QString(tr("[testnet]")); // define text to place as single text object
 
     QString font            = "Open Sans";
@@ -176,4 +176,3 @@ void SplashScreen::paintEvent(QPaintEvent *event)
     painter.setPen(curColor);
     painter.drawText(r, curAlignment, curMessage);
 }
-

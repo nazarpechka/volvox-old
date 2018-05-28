@@ -189,6 +189,7 @@ BITCOIN_QT_CPP = \
   qt/rpcconsole.cpp \
   qt/splashscreen.cpp
 
+if ENABLE_WALLET
 BITCOIN_QT_CPP += \
   qt/aboutdialog.cpp \
   qt/addressbookpage.cpp \
