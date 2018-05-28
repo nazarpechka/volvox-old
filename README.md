@@ -59,9 +59,9 @@ Compiling VOLVOX MacOS wallet:
 
     `cd VOLVOX`
 
-    `./building/mac/requirements.sh`
+    `sh ./building/mac/requirements.sh`
 
-    `./building/mac/build.sh`
+    `sh ./building/mac/build.sh`
 
 
 Starting & Configuring VOLVOX Windows wallet
