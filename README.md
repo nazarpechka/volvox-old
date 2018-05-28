@@ -23,41 +23,28 @@ Specifications:
   * 960,000 to 1,920,000: 2,000 coins
   * 1,920,000 to ~25,685,926: 1,000 coins
 
-Using VOLVOX Windows wallet
--------------
 
-1. Download the pre-compiled software from "Releases" section.
-2. Run VOLVOX-qt.
-
-Changing configuration file:
-
-1. In windows file explorer, open c:\Users\XXX\AppData\Roaming\VOLVOX (be sure to change XXX to your windows user)
-2. Right click and create a new file VOLVOX.txt
-3. Edit the file using instruction from "Using the wallet on Ubuntu/Debian" section
-4. Save and close the file
-5. Rename the file to VOLVOX.conf
-6. Start the VOLVOX-qt program.
-7. Open up VOLVOX-qt console and run ```getinfo``` (or ```getmininginfo```) to verify settings.
-
-
-Compiling VOLVOX Linux wallet
+Compiling VOLVOX Linux wallet:
 ----------------------
+1. Ensure you do not have qt5 nor qt installed.
 
-Step 1. Install the dependencies.
+2. Run these commands:
 
-```sudo apt-get update```
+      `git clone https://github.com/volvoxcoin/volvox.git`
 
-```sudo apt-get install libdb-dev libdb++-dev build-essential libtool autotools-dev automake pkg-config libssl1.0-dev libevent-dev bsdmainutils git libboost-all-dev libminiupnpc-dev libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev```
+      `cd VOLVOX`
+
+      `./building/linux/requirements.sh`
+
+      `./building/linux/build.sh`
+
+      `./building/linux/dist.sh`
 
 **Note**: If you are on debian, you will also need to `apt-get install libcanberra-gtk-module`.
 
-Step 2. Clone the git repository and compile the daemon and gui wallet:
+**Note**: If you don't need gui (pool owner), you can go with this easy command:
 
-```git clone https://github.com/volvoxcoin/VOLVOX && cd VOLVOX && ./autogen.sh && ./configure --with-incompatible-bdb && make```
-
-if you are using source-build libdb4.8(++)-dev you may need to use
-
-```./configure  CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib"```
+```git clone https://github.com/volvoxcoin/VOLVOX && cd VOLVOX && ./autogen.sh && ./configure --with-incompatible-bdb --with-gui=no && make && cd src && strip VOLVOXd && cp VOLVOXd .```
 
 **Note**: If you get a "memory exhausted" error, make a swap file. (https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04)
 
@@ -66,45 +53,35 @@ Compiling VOLVOX MacOS wallet:
 ----------------------
 1. Ensure you do not have qt5 nor qt installed.
 
-    `brew uninstall qt qt5 qt55 qt52`   
+2. Run these commands:
 
-2. Download [qt5.4.2](https://download.qt.io/archive/qt/5.4/5.4.2/qt-opensource-mac-x64-clang-5.4.2.dmg)
-
-3. Install qt5 into /usr/local/qt5
-
-   Note: Change the installation folder from "xxx/Qt5.4.2" to "/usr/local/qt5"
-
-4. Run these commands:
-
-    `export PKG_CONFIG_PATH=/usr/local/qt5/5.4/clang_64/lib/pkgconfig`
-
-    `export PATH=/usr/local/qt5/5.4/clang_64/bin:$PATH`
-
-    `export QT_CFLAGS="-I/usr/local/qt5/5.4/clang_64/lib/QtWebKitWidgets.framework/Versions/5/Headers -I/usr/local/qt5/5.4/clang_64/lib/QtWebView.framework/Versions/5/Headers -I/usr/local/qt5/5.4/clang_64/lib/QtDBus.framework/Versions/5/Headers -I/usr/local/qt5/5.4/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I/usr/local/qt5/5.4/clang_64/lib/QtWebKit.framework/Versions/5/Headers -I/usr/local/qt5/5.4/clang_64/lib/QtNetwork.framework/Versions/5/Headers -I/usr/local/qt5/5.4/clang_64/lib/QtGui.framework/Versions/5/Headers -I/usr/local/qt5/5.4/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/usr/local/qt5/5.4/clang_64/mkspecs/macx-clang -F/usr/local/qt5/5.4/clang_64/lib"`
-
-    `export QT_LIBS="-F/usr/local/qt5/5.4/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL -framework QtNetwork -framework QtWebKit -framework QtWebKitWidgets -framework QtDBus -framework QtWebView"`
-
-
-5. Install the other required items:
-
-    `brew install protobuf boost@1.57 miniupnpc openssl qrencode berkeley-db4 automake`
-
-    `brew link boost@1.57 --force`
-
-6. Download the wallet source and build:
-
-    `git clone https://github.com/nazarpechka/VOLVOX`
+    `git clone https://github.com/volvoxcoin/volvox.git`
 
     `cd VOLVOX`
 
-    `./autogen.sh`
+    `./building/mac/requirements.sh`
 
-    `./configure --with-gui=qt5`
+    `./building/mac/build.sh`
 
-    `make -j4`
+    `./building/mac/dist.sh`
 
+Starting & Configuring VOLVOX Windows wallet
+-------------
 
-Using VOLVOX Linux and MacOS wallet:
+1. Download the pre-compiled software from "Releases" section.
+2. Run VOLVOX-qt.
+
+Changing configuration file:
+
+1. In windows file explorer, open C:\Users\XXX\AppData\Roaming\VOLVOX (be sure to change XXX to your windows user)
+2. Right click and create a new file VOLVOX.txt
+3. Edit the file using instruction from "Using the wallet on Ubuntu/Debian" section
+4. Save and close the file
+5. Rename the file to VOLVOX.conf
+6. Start the VOLVOX-qt program.
+7. Open up VOLVOX-qt console and run ```getinfo``` (or ```getmininginfo```) to verify settings.
+
+Starting & Configuring VOLVOX Linux and MacOS wallet:
 ----
 The gui wallet is in ./VOLVOX/src/qt and the daemon in ./VOLVOX/src directories.
 

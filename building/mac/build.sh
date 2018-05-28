@@ -5,5 +5,6 @@ export QT_CFLAGS="-I/usr/local/qt5/5.4/clang_64/lib/QtWebKitWidgets.framework/Ve
 export QT_LIBS="-F/usr/local/qt5/5.4/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL -framework QtNetwork -framework QtWebKit -framework QtWebKitWidgets -framework QtDBus -framework QtWebView"
 
 ./autogen.sh
-./configure --with-gui=qt5
+echo QT_LIBS="\"$(echo $QT_LIBS)\"" QT_CFLAGS="\"$(echo $QT_CFLAGS)\""
+./configure --with-gui=qt5 QT_LIBS="${QT_LIBS}" QT_CFLAGS="${QT_CFLAGS}"
 make
