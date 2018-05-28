@@ -189,8 +189,8 @@ border-top-right-radius: 5px;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;</string>
+min-height: 35px;
+max-height: 35px;</string>
           </property>
          </widget>
         </item>
