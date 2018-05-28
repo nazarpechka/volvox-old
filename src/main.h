@@ -1290,6 +1290,13 @@ public:
     unsigned int nStakeTime;
     uint256 hashProofOfStake;
 
+    // Number of transactions in this block.
+    // Note: in a potential headers-first mode, this number cannot be relied upon
+    unsigned int nTx;
+
+    // (memory only) Number of transactions in the chain up to and including this block
+    unsigned int nChainTx; // change to 64-bit type when necessary; won't happen before 2030
+
     // block header
     int nVersion;
     uint256 hashMerkleRoot;
@@ -1314,6 +1321,8 @@ public:
         hashProofOfStake = 0;
         prevoutStake.SetNull();
         nStakeTime = 0;
+        nTx = 0;
+        nChainTx = 0;
 
         nVersion       = 0;
         hashMerkleRoot = 0;
@@ -1348,6 +1357,8 @@ public:
             prevoutStake.SetNull();
             nStakeTime = 0;
         }
+        nTx = 0;
+        nChainTx = 0;
 
         nVersion       = block.nVersion;
         hashMerkleRoot = block.hashMerkleRoot;

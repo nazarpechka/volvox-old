@@ -15,6 +15,20 @@ namespace Checkpoints
 {
     typedef std::map<int, uint256> MapCheckpoints;
 
+    // How many times we expect transactions after the last checkpoint to
+    // be slower. This number is a compromise, as it can't be accurate for
+    // every system. When reindexing from a fast disk with a slow CPU, it
+    // can be up to 20, while when downloading from a slow network with a
+    // fast multicore CPU, it won't be much higher than 1.
+    static const double fSigcheckVerificationFactor = 5.0;
+
+    struct CCheckpointData {
+        const MapCheckpoints *mapCheckpoints;
+        int64 nTimeLastCheckpoint;
+        int64 nTransactionsLastCheckpoint;
+        double fTransactionsPerDay;
+    };
+
     //
     // What makes a good checkpoint block?
     // + Is surrounded by blocks with reasonable timestamps
@@ -31,7 +45,7 @@ namespace Checkpoints
         (  5000, uint256("0x58535a5ce2516a940946a7776ef1d4440685cd6e89e6a0453da00cf45a6e62af"))
        (  10000, uint256("0xaa3070d610fa3ad34140af26694f9f671b70ee265bf9a11cdea2e381d9980558"))
        (  50000, uint256("0x0000000001479f4a08e30ac4a668c13ffaaf9bd8b92f96797b6a1a8ce22aeebb"))
-      (  100000, uint256("0x907ffa7caeaa7d5216b8a43517e66feef3c655e1da9289eef2e2a7f0e054248e"))
+      (  100000, uint256("0xeb525fbff526dedd2122d962c1295bb14d1b908d943b4f76f239ed230442ace2"))
 	// (  90000, uint256("0x0000000010f470ed5eda53dc12707e34297e75b7bd91f5e5ac9fb72050112e57"))
 	// (  100000, uint256("0x000000000400a93131a94ad193c63faafeb8dfcc0c7d0e6f1c9c2614cb2823eb"))
 	// (  150000, uint256("0x0000000000548f44babc055557c5870b15d1401bb0de72fb6a6c19d6c5f36d10"))
@@ -50,10 +64,25 @@ namespace Checkpoints
 	// ( 1145029, uint256("0x04def2ba205c1e5f4b33873bc9e5b0a54311370e823686aeb4d5aab0bf021899"))
         ;
 
+    static const CCheckpointData data = {
+        &mapCheckpoints
+        1527087799, // * UNIX timestamp of last checkpoint block
+        1684532,          // * total number of transactions between genesis and last checkpoint
+                    //   (the tx=... number in the SetBestChain debug.log lines)
+        500.0      // * estimated number of transactions per day after checkpoint
+    };
+
     static MapCheckpoints mapCheckpointsTestnet =
         boost::assign::map_list_of
         ( 0, hashGenesisBlockTestNet )
         ;
+
+    static const CCheckpointData dataTestnet = {
+        &mapCheckpointsTestnet,
+        1522523994,
+        0,
+        500.0
+    };
 
     static bool HACK_RELOAD = false;
 
