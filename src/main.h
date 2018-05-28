@@ -60,7 +60,12 @@ static const int fHaveUPnP = false;
 static const uint256 hashGenesisBlockOfficial("0x000005f6f3c007e9a53fbb9f3e129e56ba6c5cbabbbc1cbd542683ae6dbf859e");
 static const uint256 hashGenesisBlockTestNet("0x00000119e44befa888d35a6bb4c0025569292ee6b46f2d0d3b96ecbfa73b3245");
 
-static const int64 nMaxClockDrift = 2 * 60 * 60;        // 7.5 mins
+inline int64 GetMaxClockDrift(int height=nBestHeight){
+    if (height < 200000)
+        return 2 * 60 * 60;
+    else
+        return 10 * 60;
+}
 
 extern CScript COINBASE_FLAGS;
 
