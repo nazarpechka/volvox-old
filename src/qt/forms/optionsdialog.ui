@@ -75,6 +75,8 @@ QCheckBox
     outline: none;
     color: #eff0f1;
     margin-bottom: 2px;
+    background-color: white;
+    margin-right: 10px;
 }
 
 QCheckBox:disabled
