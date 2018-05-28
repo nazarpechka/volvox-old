@@ -84,6 +84,14 @@ namespace Checkpoints
         500.0
     };
 
+    const CCheckpointData &Checkpoints() {
+        if (fTestNet)
+            return dataTestnet;
+        else
+            return data;
+    }
+
+
     static bool HACK_RELOAD = false;
 
     void SetHackReload(bool val)
