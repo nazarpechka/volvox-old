@@ -2859,7 +2859,7 @@ bool CheckDiskSpace(uint64 nAdditionalBytes)
         string strMessage = _("Warning: Disk space is low!");
         strMiscWarning = strMessage;
         printf("*** %s\n", strMessage.c_str());
-        uiInterface.ThreadSafeMessageBox(strMessage, "VOLVOX", CClientUIInterface::OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
+        uiInterface.ThreadSafeMessageBox(strMessage, "VOLVOX", CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
         StartShutdown();
         return false;
     }
