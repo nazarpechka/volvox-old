@@ -225,7 +225,7 @@ void BitcoinGUI::createActions()
     overviewAction->setCheckable(true);
     overviewAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
     tabGroup->addAction(overviewAction);
-	
+
     chatAction = new QAction(QIcon(":/icons/social"), tr("&Chat"), this);
     chatAction->setToolTip(tr("View chat"));
     chatAction->setCheckable(true);
@@ -254,13 +254,13 @@ void BitcoinGUI::createActions()
     addressBookAction->setCheckable(true);
     addressBookAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
     tabGroup->addAction(addressBookAction);
-	
+
 	blockAction = new QAction(QIcon(":/icons/block"), tr("&Block Explorer"), this);
     blockAction->setToolTip(tr("Explore the BlockChain"));
     blockAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
     blockAction->setCheckable(true);
     tabGroup->addAction(blockAction);
-	
+
 
     connect(blockAction, SIGNAL(triggered()), this, SLOT(gotoBlockBrowser()));
 	connect(overviewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
@@ -738,7 +738,7 @@ void BitcoinGUI::gotoBlockBrowser()
 {
     blockAction->setChecked(true);
     centralWidget->setCurrentWidget(blockBrowser);
-	
+
     exportAction->setEnabled(false);
     disconnect(exportAction, SIGNAL(triggered()), 0, 0);
 }
@@ -938,7 +938,7 @@ void BitcoinGUI::setWalletLock(bool fLockForMintingOnly)
 	else if (walletModel->getEncryptionStatus() == WalletModel::Unlocked)
 	{
 		SecureString empty;
-		walletModel->setWalletLocked(true, empty);
+		walletModel->setWalletLocked(true, empty, true);
 	}
 }
 

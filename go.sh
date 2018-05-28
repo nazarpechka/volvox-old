@@ -89,15 +89,15 @@ cd ~
 #// Compile Berkeley if 4.8 is not there
 if [ -e /usr/lib/libdb_cxx-4.8.so ]
 then
-echo "BerkeleyDb already present...$(grep --include *.h -r '/usr/' -e 'DB_VERSION_STRING')" 
+echo "BerkeleyDb already present...$(grep --include *.h -r '/usr/' -e 'DB_VERSION_STRING')"
 else
-wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz 
-tar -xzvf db-4.8.30.NC.tar.gz 
+wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
+tar -xzvf db-4.8.30.NC.tar.gz
 rm db-4.8.30.NC.tar.gz
-cd db-4.8.30.NC/build_unix 
-../dist/configure --enable-cxx 
-make 
-sudo make install 
+cd db-4.8.30.NC/build_unix
+../dist/configure --enable-cxx
+make
+sudo make install
 sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
 sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so /usr/lib/libdb_cxx-4.8.so
 cd ~
@@ -110,19 +110,19 @@ fi
 results=$(find /usr/ -name libboost_chrono.so)
 if [ -z $results ]; then
 sudo rm download
-     wget https://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.zip/download 
+     wget https://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.zip/download
      unzip -o download
      cd boost_1_63_0
 	sh bootstrap.sh
 	sudo ./b2 install
 	cd ~
-	sudo rm download 
+	sudo rm download
 	sudo rm -Rf boost_1_63_0
 	#sudo ln -s $(dirname "$(find /usr/ -name libboost_chrono.so)")/lib*.so /usr/lib
 	sudo ldconfig
         #sudo rm /usr/lib/libboost_chrono.so
 else
-     echo "Libboost found..." 
+     echo "Libboost found..."
      grep --include=*.hpp -r '/usr/' -e "define BOOST_LIB_VERSION"
 fi
 
@@ -130,7 +130,7 @@ fi
 
 git clone https://github.com/VolvoxCoin/VOLVOX
 cd VOLVOX
-sudo sh autogen.sh
+./autogen.sh
 chmod 777 ~/VOLVOX/share/genbuild.sh
 chmod 777 ~/VOLVOX/src/leveldb/build_detect_platform
 
@@ -174,7 +174,7 @@ make -j$(nproc)
 if [ -e ~/VOLVOX/src/qt/VOLVOX-qt ]; then
 #sudo apt-get -y install pulseaudio
 #sudo apt-get -y install portaudio19-dev
-# synthetic voice 
+# synthetic voice
 #cd ~
 #wget https://sourceforge.net/projects/espeak/files/espeak/espeak-1.48/espeak-1.48.04-source.zip/download
 #unzip -o download
@@ -224,7 +224,7 @@ echo "You can download the partially presynced blockchain from: https://github.c
 #    sleep 1
 #    sh link.sh
 #    done
-#    
+#
 #    #checksum
 #    sudo rm blockchain
 #    wget https://www.VolvoxCoin.github.io/checksums/blockchain
@@ -236,11 +236,11 @@ echo "You can download the partially presynced blockchain from: https://github.c
 #    else
 #    echo "MD5 is matching...Success"
 #    fi
-#    
+#
 #    unzip -o VOLVOX-Blockchain*.zip -d ~/.VOLVOX
 #    sudo rm VOLVOX-Blockchain*.zip
 #else
-# echo "Blockchain will not be installed sync may be long"   
+# echo "Blockchain will not be installed sync may be long"
 #fi
 
 # Create Icon on Desktop and in menu

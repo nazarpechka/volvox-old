@@ -330,14 +330,27 @@ bool CTxDB::LoadBlockIndex()
     // out of the DB and into mapBlockIndex.
     leveldb::Iterator *iterator = pdb->NewIterator(leveldb::ReadOptions());
     // Seek to start key.
+    // and count the full index size of the currently
+    // loaded block chain.
     CDataStream ssStartKey(SER_DISK, CLIENT_VERSION);
     ssStartKey << make_pair(string("blockindex"), uint256(0));
     iterator->Seek(ssStartKey.str());
+    static long full_count = 1;
+    static long count = 0;
+    boost::format percentage_update("Loading block index %2.f%% ...");
     // Now read each entry.
     while (iterator->Valid())
     {
-        // prints the block index percentage to the console if -printtoconsole is given
-        printf("Loading blockchain index %2.f%% ...\n",((count * 100.0) / full_count));
+        count += 1;
+        // check if UI is given so update the percentage count by every percentage reached.
+        if(uiInterface != NULL && full_count != 0 && count % 1000 == 0){
+            uiInterface->InitMessage(
+                boost::str(percentage_update % ((count * 100.0) / full_count))
+            );
+
+            // prints the block index percentage to the console if -printtoconsole is given
+            printf("Loading block index %2.f%% ...\n",((count * 100.0) / full_count));
+        }
         boost::this_thread::interruption_point();
         // Unpack keys and values.
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
