@@ -9,6 +9,7 @@
 #include <boost/version.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <boost/format.hpp>
 
 #include <leveldb/env.h>
 #include <leveldb/cache.h>
@@ -318,7 +319,7 @@ static CBlockIndex *InsertBlockIndex(uint256 hash)
     return pindexNew;
 }
 
-bool CTxDB::LoadBlockIndex()
+bool CTxDB::LoadBlockIndex(CClientUIInterface* uiInterface)
 {
     if (mapBlockIndex.size() > 0) {
         // Already loaded once in this session. It can happen during migration
@@ -338,6 +339,26 @@ bool CTxDB::LoadBlockIndex()
     static long full_count = 1;
     static long count = 0;
     boost::format percentage_update("Loading block index %2.f%% ...");
+    while (it->Valid())
+    {
+        CDataStream ssKey(SER_DISK, CLIENT_VERSION);
+        ssKey.write(it->key().data(), it->key().size());
+        string strType;
+        ssKey >> strType;
+        // Did we reach the end of the data to read?
+        if (strType != "blockindex")
+            break;
+        else
+            full_count += 1;
+
+        it->Next();
+    }
+
+    leveldb::Iterator *iterator = pdb->NewIterator(leveldb::ReadOptions());
+    ssStartKey << make_pair(string("blockindex"), uint256(0));
+    iterator->Seek(ssStartKey.str());
+
+    boost::format percentage_update("Loading block index %2.f%% ...");
     // Now read each entry.
     while (iterator->Valid())
     {
@@ -349,7 +370,7 @@ bool CTxDB::LoadBlockIndex()
             );
 
             // prints the block index percentage to the console if -printtoconsole is given
-            printf("Loading block index %2.f%% ...\n",((count * 100.0) / full_count));
+            printf("Loading blockchain index %2.f%% ...\n",((count * 100.0) / full_count));
         }
         boost::this_thread::interruption_point();
         // Unpack keys and values.
