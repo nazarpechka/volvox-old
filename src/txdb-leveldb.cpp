@@ -329,16 +329,16 @@ bool CTxDB::LoadBlockIndex(CClientUIInterface* uiInterface)
     // The block index is an in-memory structure that maps hashes to on-disk
     // locations where the contents of the block can be found. Here, we scan it
     // out of the DB and into mapBlockIndex.
-    leveldb::Iterator *iterator = pdb->NewIterator(leveldb::ReadOptions());
+    leveldb::Iterator *it = pdb->NewIterator(leveldb::ReadOptions());
     // Seek to start key.
     // and count the full index size of the currently
     // loaded block chain.
     CDataStream ssStartKey(SER_DISK, CLIENT_VERSION);
     ssStartKey << make_pair(string("blockindex"), uint256(0));
-    iterator->Seek(ssStartKey.str());
+    it->Seek(ssStartKey.str());
     static long full_count = 1;
     static long count = 0;
-    boost::format percentage_update("Loading block index %2.f%% ...");
+    
     while (it->Valid())
     {
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
