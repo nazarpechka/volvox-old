@@ -2915,7 +2915,7 @@ FILE* AppendBlockFile(unsigned int& nFileRet)
     return NULL;
 }
 
-bool LoadBlockIndex(bool fAllowNew)
+bool LoadBlockIndex(bool fAllowNew,CClientUIInterface* uiInterface)
 {
     if (fTestNet)
     {
@@ -2936,7 +2936,7 @@ bool LoadBlockIndex(bool fAllowNew)
     // Load block index
     //
     CTxDB txdb("cr");
-    if (!txdb.LoadBlockIndex())
+    if (!txdb.LoadBlockIndex(uiInterface))
         return false;
 
     //

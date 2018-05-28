@@ -345,12 +345,12 @@ bool AppInit2()
     // ********************************************************* Step 2: parameter interactions
 
     fTestNet = GetBoolArg("-testnet");
-	
+
 	fBloomFilters = GetBoolArg("-bloomfilters", true);
     if (fBloomFilters) {
         nLocalServices |= NODE_BLOOM;
     }
-	
+
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
         // even when -connect or -proxy is specified
@@ -426,7 +426,7 @@ bool AppInit2()
 
     /* force fServer when running without GUI */
     fServer |= fHeadless;
-    
+
     fPrintToConsole = GetBoolArg("-printtoconsole");
     fPrintToDebugger = GetBoolArg("-printtodebugger");
     fLogTimestamps = GetBoolArg("-logtimestamps");
@@ -458,12 +458,12 @@ bool AppInit2()
         if (!ParseMoney(mapArgs["-mininput"], nMinimumInputValue))
             return InitError(strprintf(_("Invalid amount for -mininput=<amount>: '%s'"), mapArgs["-mininput"].c_str()));
     }
-    
+
     // ********************************************************* Step 4: application initialization: dir lock, daemonize, pidfile, debug log
 
     std::string strDataDir = GetDataDir().string();
 	std::string strWalletFileName = GetArg("-wallet", "wallet.dat");
- 
+
      // strWalletFileName must be a plain filename without a directory
      if (strWalletFileName != boost::filesystem::basename(strWalletFileName) + boost::filesystem::extension(strWalletFileName))
          return InitError(strprintf(_("Wallet %s resides outside data directory %s."), strWalletFileName.c_str(), strDataDir.c_str()));
@@ -688,7 +688,7 @@ bool AppInit2()
     uiInterface.InitMessage(_("Loading block index..."));
     printf("Loading block index...\n");
     nStart = GetTimeMillis();
-    if (!LoadBlockIndex())
+    if (!LoadBlockIndex(true, (&uiInterface)))
         return InitError(_("Error loading blkindex.dat"));
 
     // as LoadBlockIndex can take several minutes, it's possible the user
