@@ -191,7 +191,7 @@ bool static InitError(const std::string &str)
 
 bool static InitWarning(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("VOLVOX"), CClientUIInterface::BTN_BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
+    uiInterface.ThreadSafeMessageBox(str, _("VOLVOX"), CClientUIInterface::BTN_OK | CClientUIInterface::ICON_WARNING | CClientUIInterface::MODAL);
     return true;
 }
 
