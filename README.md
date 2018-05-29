@@ -12,16 +12,16 @@ Specifications:
 * TX fee: 0.05
 * RPC port: 19056
 * P2P port: 19156
-* Total reward cap: 31,415,926,535
-* Blockreward (~26 years of PoW):
-  * Block 0 to 30,000 : 8,000 coins
+* Total reward cap: 1,635,600,000
+* Blockreward (~7.3 years of PoW):
+  * 0 to 30,000 : 8,000 coins
   * 30,000 to 60,000 : 7,000 coins
   * 60,000 to 120,000: 6,000 coins
-  * 120,000 to 240,000: 5,000 coins
-  * 240,000 to 480,000: 4,000 coins
-  * 480,000 to 960,000: 3,000 coins
-  * 960,000 to 1,920,000: 2,000 coins
-  * 1,920,000 to ~25,685,926: 1,000 coins
+  * 120,000 to 240,000: 3,000 coins
+  * 240,000 to 480,000: 1,000 coins 
+  * 480,000 to 960,000: 250 coins 
+  * 960,000 to 1,920,000: 50 coins 
+  * 1,920,000 to 7,680,000: 10 coins 
 
 
 Compiling VOLVOX Linux wallet:
