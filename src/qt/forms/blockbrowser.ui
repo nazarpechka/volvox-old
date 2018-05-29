@@ -121,14 +121,7 @@
        <item row="12" column="1">
         <widget class="QPushButton" name="txButton">
          <property name="styleSheet">
-          <string notr="true">
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;</string>
+          <string notr="true"></string>
          </property>
          <property name="text">
           <string>Decode Transaction</string>
@@ -213,14 +206,7 @@ max-height: 25px;</string>
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;</string>
+          <string notr="true"></string>
          </property>
          <property name="maximum">
           <number>99999999</number>
@@ -244,14 +230,7 @@ max-height: 25px;</string>
        <item row="1" column="1">
         <widget class="QPushButton" name="blockButton">
          <property name="styleSheet">
-          <string notr="true">
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;</string>
+          <string notr="true"></string>
          </property>
          <property name="text">
           <string>Jump to Block</string>
@@ -399,14 +378,7 @@ max-height: 25px;</string>
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;</string>
+          <string notr="true"></string>
          </property>
          <property name="inputMask">
           <string comment="Transaction id" extracomment="Transaction id"/>

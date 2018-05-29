@@ -67,12 +67,7 @@
             </sizepolicy>
            </property>
            <property name="styleSheet">
-            <string notr="true">    background-color: #232629;
-    padding: 5px;
-    border-style: solid;
-    border: 1px solid #76797C;
-    border-radius: 2px;
-    color: #eff0f1;</string>
+            <string notr="true"></string>
            </property>
            <property name="text">
             <string/>
@@ -94,15 +89,7 @@
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;
-min-width: 125px;
-max-width: 125px;</string>
+            <string notr="true"></string>
            </property>
            <property name="text">
             <string>Connect</string>
@@ -251,15 +238,7 @@ max-width: 125px;</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;
-min-width: 150px;
-max-width: 150px;</string>
+            <string notr="true"></string>
            </property>
            <property name="text">
             <string>Disconnect</string>

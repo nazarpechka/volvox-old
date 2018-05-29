@@ -139,16 +139,7 @@ Special Thanks to: NullFunction, The VOLVOX team, and the -entire- #VOLVOX irc c
      <item>
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="styleSheet">
-        <string notr="true">
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-height: 25px;
-max-height: 25px;
-min-width: 100px;
-max-width: 100px;</string>
+        <string notr="true"></string>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>

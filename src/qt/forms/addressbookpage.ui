@@ -36,12 +36,7 @@
       <string>Double-click to edit address or label</string>
      </property>
      <property name="styleSheet">
-      <string notr="true">
-border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;</string>
+      <string notr="true"></string>
      </property>
      <property name="tabKeyNavigation">
       <bool>false</bool>
@@ -71,13 +66,7 @@ border: 2px solid #000000;</string>
         <string>Create a new address</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-width: 110px;
-max-width: 110px;</string>
+        <string notr="true"></string>
        </property>
        <property name="text">
         <string>&amp;New Address</string>
@@ -94,13 +83,7 @@ max-width: 110px;</string>
         <string>Copy the currently selected address to the system clipboard</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-width: 110px;
-max-width: 110px;</string>
+        <string notr="true"></string>
        </property>
        <property name="text">
         <string>&amp;Copy Address</string>
@@ -114,13 +97,7 @@ max-width: 110px;</string>
      <item>
       <widget class="QPushButton" name="showQRCode">
        <property name="styleSheet">
-        <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-width: 110px;
-max-width: 110px;</string>
+        <string notr="true"></string>
        </property>
        <property name="text">
         <string>Show &amp;QR Code</string>
@@ -137,13 +114,7 @@ max-width: 110px;</string>
         <string>Sign a message to prove you own a VOLVOX address</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-width: 110px;
-max-width: 110px;</string>
+        <string notr="true"></string>
        </property>
        <property name="text">
         <string>Sign &amp;Message</string>
@@ -160,13 +131,7 @@ max-width: 110px;</string>
         <string>Verify a message to ensure it was signed with a specified VOLVOX address</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-width: 110px;
-max-width: 110px;</string>
+        <string notr="true"></string>
        </property>
        <property name="text">
         <string>&amp;Verify Message</string>
@@ -183,13 +148,7 @@ max-width: 110px;</string>
         <string>Delete the currently selected address from the list</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-width: 110px;
-max-width: 110px;</string>
+        <string notr="true"></string>
        </property>
        <property name="text">
         <string>&amp;Delete</string>
@@ -222,13 +181,7 @@ max-width: 110px;</string>
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-top-left-radius: 5px;
-border-top-right-radius: 5px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 2px solid #000000;
-min-width: 85px;
-max-width: 85px;</string>
+        <string notr="true"></string>
        </property>
        <property name="standardButtons">
         <set>QDialogButtonBox::Ok</set>
