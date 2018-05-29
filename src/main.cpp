@@ -981,23 +981,23 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees)
     }
     if (nHeight<240001 && nHeight>120000)
     {
-        nSubsidy = 5000 * COIN;
+        nSubsidy = 3000 * COIN;
     }
     if (nHeight<480001 && nHeight>240000)
     {
-        nSubsidy = 4000 * COIN;
+        nSubsidy = 1000 * COIN;
     }
     if (nHeight<960001 && nHeight>480000)
     {
-        nSubsidy = 3000 * COIN;
+        nSubsidy = 250 * COIN;
     }
     if (nHeight<1920001 && nHeight>960000)
     {
-        nSubsidy = 2000 * COIN;
+        nSubsidy = 50 * COIN;
     }
-    if (nHeight<25685926 && nHeight>1920000)
+    if (nHeight<7680000 && nHeight>1920000)
     {
-        nSubsidy = 1000 * COIN;
+        nSubsidy = 10 * COIN;
     }
     return nSubsidy + nFees;
 }
