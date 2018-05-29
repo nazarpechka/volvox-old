@@ -76,8 +76,8 @@ border-top-right-radius: 5px;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 2px solid #000000;
-min-width: 95px;
-max-width: 95px;</string>
+min-width: 110px;
+max-width: 110px;</string>
        </property>
        <property name="text">
         <string>&amp;New Address</string>
@@ -99,8 +99,8 @@ border-top-right-radius: 5px;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 2px solid #000000;
-min-width: 95px;
-max-width: 95px;</string>
+min-width: 110px;
+max-width: 110px;</string>
        </property>
        <property name="text">
         <string>&amp;Copy Address</string>
@@ -119,8 +119,8 @@ border-top-right-radius: 5px;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 2px solid #000000;
-min-width: 95px;
-max-width: 95px;</string>
+min-width: 110px;
+max-width: 110px;</string>
        </property>
        <property name="text">
         <string>Show &amp;QR Code</string>
@@ -142,8 +142,8 @@ border-top-right-radius: 5px;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 2px solid #000000;
-min-width: 95px;
-max-width: 95px;</string>
+min-width: 110px;
+max-width: 110px;</string>
        </property>
        <property name="text">
         <string>Sign &amp;Message</string>
@@ -165,8 +165,8 @@ border-top-right-radius: 5px;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 2px solid #000000;
-min-width: 95px;
-max-width: 95px;</string>
+min-width: 110px;
+max-width: 110px;</string>
        </property>
        <property name="text">
         <string>&amp;Verify Message</string>
@@ -188,8 +188,8 @@ border-top-right-radius: 5px;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 2px solid #000000;
-min-width: 95px;
-max-width: 95px;</string>
+min-width: 110px;
+max-width: 110px;</string>
        </property>
        <property name="text">
         <string>&amp;Delete</string>
